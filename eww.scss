@@ -1,0 +1,193 @@
+// =============================================================================
+// gungnir-gauges.scss — Cyber-Viking aesthetic
+//   • Ice-cyan + forge-bronze two-tone on deep midnight
+//   • Sharp angular edges, no rounded corners (runes are all straight lines)
+//   • Subtle glow on accent text (the "cyber" bit)
+//   • Bronze for warm/passive elements, cyan for live/active data
+// =============================================================================
+
+// === palette ================================================================
+$bg:           rgba(8, 6, 20, 0.78);            // deep midnight, slight purple bias
+$bg-edge:      rgba(180, 130, 60, 0.35);        // bronze edge highlight
+$cyan:         #4FE3D8;                          // primary live/active
+$cyan-soft:    rgba(79, 227, 216, 0.55);
+$cyan-glow:    rgba(79, 227, 216, 0.85);
+$bronze:       #D9A050;                          // warm passive (labels)
+$bronze-soft:  rgba(217, 160, 80, 0.55);
+$bone:         #F0EBE0;                          // primary text
+$bone-dim:     rgba(240, 235, 224, 0.55);
+$track:        rgba(60, 35, 25, 0.55);           // ring track (forge ember dark)
+$blood:        #C84A4A;                          // critical-state highlight (>80%)
+
+* {
+    all: unset;
+    // Hack has the tightest line gap of the fonts available.
+    font-family: "Hack", "Inconsolata", "JetBrains Mono", "Iosevka",
+                 "Ubuntu Mono", "DejaVu Sans Mono", "Noto Sans", monospace;
+    min-height: 0;
+}
+
+// Hard reset GTK widget intrinsic padding. NOT using !important so per-class
+// margin tweaks below still work.
+label, box, overlay, circular-progress {
+    min-height: 0;
+    min-width: 0;
+    padding: 0;
+    border: none;
+}
+// Modest negative margin to pull labels into each other's Pango-allocated
+// vertical whitespace (the gap that exists under every label by default).
+label {
+    margin: -2px 0 -2px 0;
+}
+
+// For rune-containing labels: Symbola has WAY tighter line metrics than
+// Noto Sans Runic (which has huge ascender padding above the glyph row).
+// Symbola covers Elder Futhark and most historical scripts.
+.title-runes, .runes,
+.section-rune,
+.ring-label,
+.proc-rune,
+.footer-runes {
+    // Junicode has Elder Futhark with normal line metrics (no huge empty
+    // ascender space). Quivira and Symbola are decent fallbacks. Noto Sans
+    // Runic is LAST resort — works but has tall metrics.
+    font-family: "Junicode", "Quivira", "Symbola",
+                 "Noto Sans Runic", "Noto Sans", monospace;
+}
+
+// === main panel =============================================================
+.panel {
+    background-color: $bg;
+    padding: 6px 8px;
+    border: 1px solid $bg-edge;
+    border-radius: 0;
+    color: $bone;
+    font-size: 10px;
+}
+
+// === header (title + runic subtitle) ========================================
+.title {
+    color: $cyan;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-shadow: 0 0 3px $cyan-glow;
+}
+
+.runes {                             // ᚷᚢᛝᚾᛁᚱ row under the title
+    color: $bronze;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 2px rgba(217,160,80,0.5);
+}
+
+.subtitle {
+    color: $bone-dim;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+// === runic section header ===================================================
+// Format: "ᚲ │ CPU CORES"
+.section-rune {
+    color: $cyan;
+    font-size: 14px;
+    text-shadow: 0 0 6px $cyan-glow;
+}
+.section-name {
+    color: $bronze;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.section-divider {
+    color: $bronze-soft;
+    font-size: 11px;
+}
+.section-header-row {
+    margin-top: 2px;
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+    border-bottom: 1px solid rgba(217,160,80,0.18);
+}
+
+// === small CPU rings ========================================================
+.ring-cell {
+    padding: 2px;
+}
+
+.ring {
+    color: $cyan;
+    background-color: $track;
+    min-width: 50px; min-height: 50px;
+}
+
+.ring-value {
+    color: $bone;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 0 0 2px $cyan-glow;
+}
+
+.ring-label {
+    color: $bronze;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+// === big rings (memory / swap / disk) =======================================
+.ring-big {
+    color: $cyan;
+    background-color: $track;
+    min-width: 60px; min-height: 60px;
+}
+
+.big-pct {
+    color: $bone;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: 0 0 3px $cyan-glow;
+}
+
+.big-label {
+    color: $bronze;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.big-detail {
+    color: $bone-dim;
+    font-size: 11px;
+}
+
+// === process rows ===========================================================
+.proc-rune {
+    color: $bronze-soft;
+    font-size: 13px;
+}
+.proc-name {
+    color: $bone;
+    font-size: 12px;
+}
+.proc-pct {
+    color: $cyan;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 0 2px $cyan-glow;
+}
+
+// === footer =================================================================
+.footer {
+    color: $bronze-soft;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(217,160,80,0.18);
+}
+
+.footer-runes {
+    color: $bronze;
+    font-size: 13px;
+    letter-spacing: 4px;
+}

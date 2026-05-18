@@ -1,0 +1,14 @@
+# eww runtime artifacts
+.cache/
+*.log
+/tmp/
+
+# OS / editor noise
+.DS_Store
+*~
+*.swp
+*.swo
+.idea/
+.vscode/
+__pycache__/
+*.pyc

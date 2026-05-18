@@ -1,0 +1,131 @@
+;; ============================================================================
+;; gungnir-gauges.yuck — Cyber-Viking system gauges (KDE Wayland + eww)
+;;
+;; Runic glyphs (Elder Futhark) used as section markers:
+;;   ᚷᚢᛝᚾᛁᚱ  = GUNGNIR (the spear)
+;;   ᚲ Kenaz (torch / illumination) → CPU
+;;   ᛗ Mannaz (mankind / mind)      → MEMORY
+;;   ᚦ Thurisaz (giant / Thor)      → PROCESSES
+;;   ᛏ Tiwaz (god of justice)       → FOOTER
+;;
+;; IMPORTANT: every `box` carries `:space-evenly false` so children take their
+;; natural height instead of being distributed across the box's full allocation.
+;; That was the cause of the "3 blank lines under every text" problem.
+;; ============================================================================
+
+(defpoll sys :interval "2s"
+  :initial `{"cpu":[0,0,0,0,0,0,0,0],"cpu_avg":0,"freq_mhz":0,"temp_c":0,"uptime":"-","ram_used_gb":0,"ram_total_gb":1,"ram_pct":0,"swap_used_gb":0,"swap_total_gb":1,"swap_pct":0,"disk_used_gb":0,"disk_total_gb":1,"disk_pct":0,"top_cpu":[{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0}],"top_ram":[{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0}]}`
+  `python3 /home/volmarr/.config/eww/scripts/sysinfo.py`)
+
+;; -- ring (CPU core) ---------------------------------------------------------
+(defwidget ring [value label]
+  (box :orientation "v" :space-evenly false :spacing 1 :class "ring-cell"
+    (overlay
+      (circular-progress :class "ring" :value value
+                         :thickness 6 :start-at 75 :clockwise true
+                         :width 52 :height 52)
+      (label :class "ring-value" :text "${round(value, 0)}%"))
+    (label :class "ring-label" :text label)))
+
+;; -- big ring (RAM/SWAP/DISK) ------------------------------------------------
+(defwidget big-ring [percent label detail]
+  (box :orientation "v" :space-evenly false :spacing 1
+    (overlay
+      (circular-progress :class "ring-big" :value percent
+                         :thickness 8 :start-at 75 :clockwise true
+                         :width 76 :height 76)
+      (label :class "big-pct" :text "${round(percent, 0)}%"))
+    (label :class "big-label"  :text label)
+    (label :class "big-detail" :text detail)))
+
+;; -- one process row ---------------------------------------------------------
+(defwidget proc-row [rune name pct]
+  (box :orientation "h" :space-evenly false :spacing 4
+    (label :class "proc-rune" :text rune)
+    (label :class "proc-name" :text name :hexpand true :xalign 0)
+    (label :class "proc-pct"  :text "${round(pct, 1)}%" :xalign 1)))
+
+;; -- section header ----------------------------------------------------------
+(defwidget section [rune name]
+  (box :orientation "h" :space-evenly false :class "section-header-row"
+       :spacing 4 :halign "center"
+    (label :class "section-rune" :text rune)
+    (label :class "section-divider" :text "│")
+    (label :class "section-name" :text name)))
+
+;; ============================================================================
+;; Main widget
+;; ============================================================================
+(defwidget gungnir []
+  (box :orientation "v" :space-evenly false :spacing 4 :class "panel"
+
+    ;; ===== Header =====
+    (box :orientation "v" :space-evenly false :spacing 0 :halign "center"
+      (label :class "title"    :text "GUNGNIR")
+      (label :class "runes"    :text "ᚷᚢᛝᚾᛁᚱ")
+      (label :class "subtitle"
+             :text "${sys.freq_mhz} MHz ・ ${sys.temp_c}°C ・ UP ${sys.uptime}"))
+
+    ;; ===== CPU =====
+    (section :rune "ᚲ" :name "CPU CORES · KENAZ")
+    (box :orientation "v" :space-evenly false :spacing 2
+      (box :orientation "h" :space-evenly false :spacing 4 :halign "center"
+        (ring :value {sys.cpu[0]} :label "ᛁ")
+        (ring :value {sys.cpu[1]} :label "ᛁᛁ")
+        (ring :value {sys.cpu[2]} :label "ᛁᛁᛁ")
+        (ring :value {sys.cpu[3]} :label "ᛁᚢ"))
+      (box :orientation "h" :space-evenly false :spacing 4 :halign "center"
+        (ring :value {sys.cpu[4]} :label "ᚢ")
+        (ring :value {sys.cpu[5]} :label "ᚢᛁ")
+        (ring :value {sys.cpu[6]} :label "ᚢᛁᛁ")
+        (ring :value {sys.cpu[7]} :label "ᚢᛁᛁᛁ")))
+
+    ;; ===== Memory / storage =====
+    (section :rune "ᛗ" :name "MEMORY · MANNAZ")
+    (box :orientation "h" :space-evenly false :spacing 6 :halign "center"
+      (big-ring :percent {sys.ram_pct}
+                :label   "RAM"
+                :detail  "${sys.ram_used_gb}/${sys.ram_total_gb}G")
+      (big-ring :percent {sys.swap_pct}
+                :label   "SWAP"
+                :detail  "${sys.swap_used_gb}/${sys.swap_total_gb}G")
+      (big-ring :percent {sys.disk_pct}
+                :label   "ROOT"
+                :detail  "${sys.disk_used_gb}/${sys.disk_total_gb}G"))
+
+    ;; ===== Processes (CPU) =====
+    (section :rune "ᚦ" :name "PROCESSES · CPU")
+    (box :orientation "v" :space-evenly false :spacing 0
+      (proc-row :rune "ᛏ" :name {sys.top_cpu[0].name} :pct {sys.top_cpu[0].pct})
+      (proc-row :rune "ᛒ" :name {sys.top_cpu[1].name} :pct {sys.top_cpu[1].pct})
+      (proc-row :rune "ᛖ" :name {sys.top_cpu[2].name} :pct {sys.top_cpu[2].pct})
+      (proc-row :rune "ᛗ" :name {sys.top_cpu[3].name} :pct {sys.top_cpu[3].pct})
+      (proc-row :rune "ᛚ" :name {sys.top_cpu[4].name} :pct {sys.top_cpu[4].pct}))
+
+    ;; ===== Processes (RAM) =====
+    (section :rune "ᚦ" :name "PROCESSES · RAM")
+    (box :orientation "v" :space-evenly false :spacing 0
+      (proc-row :rune "ᛏ" :name {sys.top_ram[0].name} :pct {sys.top_ram[0].pct})
+      (proc-row :rune "ᛒ" :name {sys.top_ram[1].name} :pct {sys.top_ram[1].pct})
+      (proc-row :rune "ᛖ" :name {sys.top_ram[2].name} :pct {sys.top_ram[2].pct})
+      (proc-row :rune "ᛗ" :name {sys.top_ram[3].name} :pct {sys.top_ram[3].pct})
+      (proc-row :rune "ᛚ" :name {sys.top_ram[4].name} :pct {sys.top_ram[4].pct}))
+
+    ;; ===== Footer =====
+    (box :orientation "v" :space-evenly false :spacing 0 :halign "center"
+         :class "footer"
+      (label :class "footer-runes" :text "ᛏ · ᛟᚱᚦᛚᚨᚷ · ᛏ")
+      (label :class "footer" :text "purplelongship · kubuntu 26.04"))))
+
+;; ============================================================================
+;; Window
+;; ============================================================================
+(defwindow gungnir-gauges
+  :monitor 0
+  :geometry (geometry :x "30px" :y "48px"
+                       :width "260px"
+                       :anchor "top right")
+  :stacking "bg"
+  :exclusive false
+  :focusable false
+  (gungnir))
