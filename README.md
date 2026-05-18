@@ -1,3 +1,9 @@
+---
+
+![https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/9067ab39-38f4-48cd-9427-6a7b94e42d2b.jpeg](https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/9067ab39-38f4-48cd-9427-6a7b94e42d2b.jpeg)
+
+---
+
 # Eww Viking Gauge Theme
 
 Cyber-Viking system monitor for **eww** on Linux (KDE Wayland tested).
@@ -50,6 +56,12 @@ every child with vertical padding. **That property is the single most common
 reason eww widgets look strangely loose** — every box in this config sets
 `:space-evenly false` explicitly. Keep that rule and you'll save yourself a
 debugging session.
+
+---
+
+![https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/1d481752-ccf0-44a5-b839-bf8ae9d88fd6.jpeg](https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/1d481752-ccf0-44a5-b839-bf8ae9d88fd6.jpeg)
+
+---
 
 ## What you get
 
@@ -128,6 +140,12 @@ Terminal=false
 X-KDE-AutostartScript=true
 X-GNOME-Autostart-enabled=true
 ```
+
+---
+
+![https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/db2ba42d-cc38-4111-ae59-dfa426e1166a.jpeg](https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/db2ba42d-cc38-4111-ae59-dfa426e1166a.jpeg)
+
+---
 
 ## Adapting to your machine
 
