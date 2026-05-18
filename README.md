@@ -7,6 +7,50 @@ ASUS Zephyrus G14 (8-physical-core Ryzen) but easily adapted.
 
 ![preview](preview.png)
 
+## About
+
+This widget started as an attempt to recreate the iconic Twister-OS system
+gauge on Linux Wayland. Conky — the tool the Twister-OS look was built on —
+struggles under modern Wayland compositors because its whole "stick to the
+desktop, transparent, always-at-bottom" magic depends on X11 concepts that
+don't exist in Wayland. Rather than fight that, the design was rebuilt in
+[eww](https://github.com/elkowar/eww), which is Wayland-native and gives you
+full SCSS control over the look.
+
+The aesthetic settled into something the original Conky theme could never
+quite reach — a *cyber-Viking* take: angular runic glyphs as section markers
+(Elder Futhark, drawn in [Junicode](https://junicode.sourceforge.io/) for
+clean line metrics), ice-cyan for *live* data that glows softly, forge-bronze
+for the *passive* labels that hold the structure together. The runes aren't
+decoration — they're the section's identity:
+
+| Rune | Name | Meaning | What it marks |
+|---|---|---|---|
+| ᚲ | Kenaz | torch / illumination | CPU cores — the thinking light |
+| ᛗ | Mannaz | mankind / the mind | memory + storage — what is held |
+| ᚦ | Thurisaz | giant / Thor | processes — the forces at work |
+| ᛏ | Tiwaz | god of justice | footer — that which is right and known |
+
+The widget's title text reads `GUNGNIR` (Odin's spear — the one that never
+misses), with the runic spelling `ᚷᚢᛝᚾᛁᚱ` below. That's the hostname of the
+laptop it was built on, and the natural place to swap to whatever name your
+own machine wears. The decorative footer line `ᛏ · ᛟᚱᚦᛚᚨᚷ · ᛏ` is bracket-rune
++ "orthlag" (a stylized "long ship" reference) + bracket-rune, a small
+flourish tying the widget back to its host. Replace it with anything that
+feels right.
+
+If you want it dialed quieter, drop the text-shadow blurs and turn `$cyan`
+down toward white — it becomes a clean minimal monitor. If you want it
+louder, raise the shadow blur and the `$bg` opacity; it leans more into the
+"cyber" half of the brief.
+
+A small note about the implementation, written into the SCSS as a comment:
+eww's `box` widget defaults to `:space-evenly true`, which silently puffs
+every child with vertical padding. **That property is the single most common
+reason eww widgets look strangely loose** — every box in this config sets
+`:space-evenly false` explicitly. Keep that rule and you'll save yourself a
+debugging session.
+
 ## What you get
 
 - **Header**: hostname rendered in Latin and Elder Futhark runes, with live
