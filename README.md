@@ -5,7 +5,7 @@ Ice-cyan + forge-bronze rings on a deep midnight panel, with runic section
 markers and a runic spelling of the host machine's name. Designed for an
 ASUS Zephyrus G14 (8-physical-core Ryzen) but easily adapted.
 
-![preview](preview.png)
+https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/Screenshot_20260518_102542.png](https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/Screenshot_20260518_102542.png)![
 
 ## About
 
