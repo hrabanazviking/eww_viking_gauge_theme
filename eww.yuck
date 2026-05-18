@@ -125,7 +125,7 @@
   :geometry (geometry :x "30px" :y "48px"
                        :width "260px"
                        :anchor "top right")
-  :stacking "bg"
+  :stacking "bottom"
   :exclusive false
   :focusable false
   (gungnir))
