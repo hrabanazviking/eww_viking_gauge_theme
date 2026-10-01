@@ -6,6 +6,9 @@
 
 # Eww Viking Gauge Theme
 
+Read the [technical manual](TECHNICAL_MANUAL.md) for installation, active-config
+updates, collector fields, CPU/GPU interpretation, customization and troubleshooting.
+
 Cyber-Viking system monitor for **eww** on Linux (KDE Wayland tested).
 Ice-cyan + forge-bronze rings on a deep midnight panel, with runic section
 markers and a runic spelling of the host machine's name. Designed for an
