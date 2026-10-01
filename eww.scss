@@ -161,6 +161,19 @@ label {
     font-size: 11px;
 }
 
+// === GPU section ============================================================
+.gpu-name {
+    color: $bone-dim;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+.gpu-temp {
+    color: $bronze;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 2px rgba(217,160,80,0.5);
+}
+
 // === process rows ===========================================================
 .proc-rune {
     color: $bronze-soft;

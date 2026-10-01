@@ -30,3 +30,11 @@ Add regression tests for observed failure paths, run existing tests, validate se
 3. Implement the scoped fixes and regression tests.
 4. Deploy locally and verify behavior.
 5. Update architecture/interface/devlog documentation and push verified changes.
+
+## Completed verification
+
+2026-09-30: 2 tests pass for damaged CPU history and missing metrics. The live
+collector emits valid complete JSON, including the RTX 2060 GPU metrics. Updated
+configuration, collector and JSON defaults were installed; eww reload succeeds.
+The NVIDIA driver repair and Ollama GPU inference were verified on the local host.
+Install sysinfo.defaults.json alongside sysinfo.py as documented in README.md.

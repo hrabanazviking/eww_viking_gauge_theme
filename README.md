@@ -110,6 +110,7 @@ mkdir -p ~/.config/eww/scripts
 cp eww.yuck ~/.config/eww/
 cp eww.scss ~/.config/eww/
 cp scripts/sysinfo.py ~/.config/eww/scripts/
+cp scripts/sysinfo.defaults.json ~/.config/eww/scripts/
 chmod +x ~/.config/eww/scripts/sysinfo.py
 ```
 
@@ -230,3 +231,12 @@ Support is always appreciated, but never required. Using, sharing, testing, cont
 ---
 
 
+
+## Resilience and GPU update (September 2026)
+
+The previously installed GPU section is now included in this repository. Copy
+scripts/sysinfo.defaults.json along with scripts/sysinfo.py when installing.
+The poll command resolves the script relative to eww's configuration directory.
+A corrupt CPU history file resets automatically; missing sensors leave complete
+JSON defaults so every gauge and all five process slots remain valid. History
+lives under XDG_CACHE_HOME/eww-viking. Tests: python3 -m unittest discover -s tests -v.

@@ -5,6 +5,7 @@
 ;;   ᚷᚢᛝᚾᛁᚱ  = GUNGNIR (the spear)
 ;;   ᚲ Kenaz (torch / illumination) → CPU
 ;;   ᛗ Mannaz (mankind / mind)      → MEMORY
+;;   ᛞ Dagaz (day / breakthrough)   → GPU (the thing that brings light to the screen)
 ;;   ᚦ Thurisaz (giant / Thor)      → PROCESSES
 ;;   ᛏ Tiwaz (god of justice)       → FOOTER
 ;;
@@ -14,8 +15,8 @@
 ;; ============================================================================
 
 (defpoll sys :interval "2s"
-  :initial `{"cpu":[0,0,0,0,0,0,0,0],"cpu_avg":0,"freq_mhz":0,"temp_c":0,"uptime":"-","ram_used_gb":0,"ram_total_gb":1,"ram_pct":0,"swap_used_gb":0,"swap_total_gb":1,"swap_pct":0,"disk_used_gb":0,"disk_total_gb":1,"disk_pct":0,"top_cpu":[{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0}],"top_ram":[{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0}]}`
-  `python3 /home/volmarr/.config/eww/scripts/sysinfo.py`)
+  :initial `{"cpu":[0,0,0,0,0,0,0,0],"cpu_avg":0,"freq_mhz":0,"temp_c":0,"uptime":"-","ram_used_gb":0,"ram_total_gb":1,"ram_pct":0,"swap_used_gb":0,"swap_total_gb":1,"swap_pct":0,"disk_used_gb":0,"disk_total_gb":1,"disk_pct":0,"gpu_available":false,"gpu_name":"-","gpu_util_pct":0,"gpu_vram_used_gb":0,"gpu_vram_total_gb":1,"gpu_vram_pct":0,"gpu_temp_c":0,"gpu_power_w":0,"top_cpu":[{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0}],"top_ram":[{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0},{"name":"-","pct":0}]}`
+  `python3 scripts/sysinfo.py`)
 
 ;; -- ring (CPU core) ---------------------------------------------------------
 (defwidget ring [value label]
@@ -92,6 +93,20 @@
       (big-ring :percent {sys.disk_pct}
                 :label   "ROOT"
                 :detail  "${sys.disk_used_gb}/${sys.disk_total_gb}G"))
+
+    ;; ===== GPU =====
+    (section :rune "ᛞ" :name "GPU · DAGAZ")
+    (box :orientation "v" :space-evenly false :spacing 1 :halign "center"
+      (label :class "gpu-name" :text {sys.gpu_name})
+      (box :orientation "h" :space-evenly false :spacing 6 :halign "center"
+        (big-ring :percent {sys.gpu_util_pct}
+                  :label   "UTIL"
+                  :detail  "${sys.gpu_power_w}W")
+        (big-ring :percent {sys.gpu_vram_pct}
+                  :label   "VRAM"
+                  :detail  "${sys.gpu_vram_used_gb}/${sys.gpu_vram_total_gb}G"))
+      (label :class "gpu-temp"
+             :text "${sys.gpu_temp_c}°C"))
 
     ;; ===== Processes (CPU) =====
     (section :rune "ᚦ" :name "PROCESSES · CPU")
