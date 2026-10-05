@@ -1,4 +1,3 @@
----
 
 ![https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/9067ab39-38f4-48cd-9427-6a7b94e42d2b.jpeg](https://raw.githubusercontent.com/hrabanazviking/eww_viking_gauge_theme/refs/heads/main/9067ab39-38f4-48cd-9427-6a7b94e42d2b.jpeg)
 
