@@ -179,7 +179,7 @@
 ;; ============================================================================
 (defwindow gungnir-gauges
   :monitor 0
-  :geometry (geometry :x "30px" :y "48px"
+  :geometry (geometry :x "30px" :y "4px"
                        :width "297px"
                        :anchor "top right")
   :stacking "bottom"
