@@ -59,7 +59,7 @@ label {
 // === main panel =============================================================
 .panel {
     background-color: $bg;
-    padding: 5px 7px;
+    padding: 5px 6px;
     border: 1px solid $bg-edge;
     border-radius: 0;
     color: $bone;
@@ -69,7 +69,7 @@ label {
 // === header (title + runic subtitle) ========================================
 .title {
     color: $cyan;
-    font-size: 21px;
+    font-size: 20px;
     font-weight: bold;
     letter-spacing: 4px;
     text-shadow: 0 0 3px $cyan-glow;
@@ -120,7 +120,7 @@ label {
 .ring {
     color: $cyan;
     background-color: $track;
-    min-width: 48px; min-height: 48px;
+    min-width: 45px; min-height: 45px;
 }
 
 .ring-value {
@@ -140,7 +140,7 @@ label {
 .ring-big {
     color: $cyan;
     background-color: $track;
-    min-width: 57px; min-height: 57px;
+    min-width: 54px; min-height: 54px;
 }
 
 .big-pct {

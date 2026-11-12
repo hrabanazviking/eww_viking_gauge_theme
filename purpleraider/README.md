@@ -29,8 +29,8 @@ layer underneath was rebuilt for this machine.
   gauge — no honest source exists for it without the XRT userland.
 - **Header / footer** — header title reads "PURPLERAIDER" with its
   Elder Futhark spelling beneath; footer reads "purpleraider ·
-  kubuntu 26.10". Window is 314 px wide — the 330 px layout scaled to
-  95% so the 4-across rings fit without the footer running off the
+  kubuntu 26.10". Window is 297 px wide — the 330 px layout scaled to
+  90% so the 4-across rings fit without the footer running off the
   bottom of the screen.
 
 ## Install
