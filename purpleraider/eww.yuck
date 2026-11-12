@@ -4,7 +4,7 @@
 ;; temperatures + network sections. Adapted from the purplelongship original.
 ;;
 ;; Runic glyphs (Elder Futhark) used as section markers:
-;;   ᚷᚢᛝᚾᛁᚱ  = GUNGNIR (the spear)
+;;   ᛈᚢᚱᛈᛚᛖᚱᚨᛁᛞᛖᚱ  = PURPLERAIDER (header display name)
 ;;   ᚲ Kenaz (torch / illumination) → CPU
 ;;   ᛗ Mannaz (mankind / mind)      → MEMORY
 ;;   ᛞ Dagaz (day / breakthrough)   → GPU (the thing that brings light to the screen)
@@ -28,7 +28,7 @@
     (overlay
       (circular-progress :class "ring" :value value
                          :thickness 6 :start-at 75 :clockwise true
-                         :width 52 :height 52)
+                         :width 49 :height 49)
       (label :class "ring-value" :text "${round(value, 0)}%"))
     (label :class "ring-label" :text label)))
 
@@ -38,7 +38,7 @@
     (overlay
       (circular-progress :class "ring-big" :value percent
                          :thickness 8 :start-at 75 :clockwise true
-                         :width 70 :height 70)
+                         :width 66 :height 66)
       (label :class "big-pct" :text "${round(percent, 0)}%"))
     (label :class "big-label"  :text label)
     (label :class "big-detail" :text detail)))
@@ -73,8 +73,8 @@
 
     ;; ===== Header =====
     (box :orientation "v" :space-evenly false :spacing 0 :halign "center"
-      (label :class "title"    :text "GUNGNIR")
-      (label :class "runes"    :text "ᚷᚢᛝᚾᛁᚱ")
+      (label :class "title"    :text "PURPLERAIDER")
+      (label :class "runes"    :text "ᛈᚢᚱᛈᛚᛖᚱᚨᛁᛞᛖᚱ")
       (label :class "subtitle"
              :text "${sys.freq_mhz} MHz ・ ${sys.temp_c}°C ・ UP ${sys.uptime}"))
 
@@ -180,7 +180,7 @@
 (defwindow gungnir-gauges
   :monitor 0
   :geometry (geometry :x "30px" :y "48px"
-                       :width "330px"
+                       :width "314px"
                        :anchor "top right")
   :stacking "bottom"
   :exclusive false

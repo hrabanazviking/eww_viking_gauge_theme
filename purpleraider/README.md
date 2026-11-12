@@ -27,8 +27,11 @@ layer underneath was rebuilt for this machine.
 - **NPU** — an honest nameplate under the GPU section: the AMD XDNA 2 at
   `/dev/accel/accel0` is reported present/absent. There is no utilization
   gauge — no honest source exists for it without the XRT userland.
-- **Footer** — "purpleraider · kubuntu 26.10". Window widened to 330 px
-  to hold the 4-across rings.
+- **Header / footer** — header title reads "PURPLERAIDER" with its
+  Elder Futhark spelling beneath; footer reads "purpleraider ·
+  kubuntu 26.10". Window is 314 px wide — the 330 px layout scaled to
+  95% so the 4-across rings fit without the footer running off the
+  bottom of the screen.
 
 ## Install
 
